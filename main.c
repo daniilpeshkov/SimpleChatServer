@@ -9,11 +9,12 @@
 #include <sys/poll.h>
 
 #include "vector.h"
+#include "client.h"
 
 #define LISTEN_SOCK_INDEX 0
 
 #define PORT 25565
-#define INITIAL_POLLFD_SIZE 255
+#define INITIAL_CONN_SIZE 255
 
 int sock_bind_inet(int sockfd, int port) {
     struct sockaddr_in addr;
@@ -28,7 +29,15 @@ int sock_bind_inet(int sockfd, int port) {
 void main(void) {
     int tcp_sock = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, IPPROTO_TCP);
 
-    vector pollfd_vec = vector_new(sizeof(struct pollfd), INITIAL_POLLFD_SIZE);
+    vector pollfd_vec = vector_new(sizeof(struct pollfd), INITIAL_CONN_SIZE);
+    vector clients_vec = vector_new(sizeof(client_t), INITIAL_CONN_SIZE);
+
+    client_t tmp_client;
+
+ // empty client because pollfd_vec[i] corresponds to clients_vec[i]
+ // but pollfd_vec[0] is accept socket
+    vector_append(clients_vec, &tmp_client);
+
 
     if (tcp_sock == -1) {
         perror("can't create socket");
@@ -71,30 +80,50 @@ void main(void) {
                 exit(EXIT_FAILURE);
             }
 
+            vector_append(clients_vec, calloc(1, sizeof(client_t)));
+            ((client_t*)vector_get(clients_vec, vector_size(clients_vec) - 1))->sock_fd = client_fd;
+
             memset(&tmp_pollfd, 0, sizeof(tmp_pollfd));
             tmp_pollfd.fd = client_fd;
-            tmp_pollfd.events = POLLIN;
+            tmp_pollfd.events = POLLIN | POLLERR | POLLHUP;
             vector_append(pollfd_vec, &tmp_pollfd);
             printf("new client\n");
         }
 
         size_t size = vector_size(pollfd_vec);
 
-        for (size_t i = 1; i < size && eventn != 0; i++) {
+        for (size_t i = 1; i < size && eventn != 0; i++) { // in loop
             struct pollfd* tmp_pollfd = vector_get(pollfd_vec, i);
 
-            if (tmp_pollfd->revents & POLLIN) {
-                char buf[100];
-                int size = recv(tmp_pollfd->fd, buf, sizeof(buf), 0);
-                printf("new data from client %u", i);
-                for (int i = 0; i < size; i++) {
-                    printf("%4x", buf[i]);
-                }
-                printf("\n");
+            if (tmp_pollfd->revents & POLLERR || tmp_pollfd->revents & POLLHUP) {
+                //USER disconnected
+                close(((client_t*)vector_get(clients_vec, i))->sock_fd);
+                vector_remove(pollfd_vec, i);
+                vector_remove(clients_vec, i);
+                eventn -= 1;
+                i -= 1;
+                continue;
             }
 
+            if (tmp_pollfd->revents & POLLIN) {
+                event_new_data_process(vector_get(clients_vec, i));
+                eventn -= 1;
+                continue;
+            }
         }
+
+        size = vector_size(clients_vec);
+        for (int i = 1; i < size; i++) {
+            client_t *tmp_client = vector_get(clients_vec, i);
+
+            if (tmp_client->message_received) {
+                tmp_client->message_received = 0;
+                //TODO process new message
+            }
+        }
+
     }
+
     close(tcp_sock);
     vector_free(pollfd_vec);
 }

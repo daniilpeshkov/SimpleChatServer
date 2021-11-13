@@ -43,3 +43,11 @@ void vector_free(vector self) {
     free(((vector_t*)self)->arr);
     free(self);
 }
+
+int vector_remove(vector self, unsigned int index) {
+    vector_t *vec = (vector_t*)self;
+    if (index >= vec->size) return 0;
+    vec->size -= 1;    
+    memcpy(vec->arr + vec->base_size * index, vec->arr + vec->base_size * vec->size, vec->base_size);
+    return 1;
+}

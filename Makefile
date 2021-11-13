@@ -1,13 +1,12 @@
-obj= vector.o main.o
 target= test
 .phony: all $(obj)
 
-all: main.o vector.o
-	gcc $^ -o test -o $(target)
+all: *.o
+	gcc $^  -o $(target) -g
 	mv $(target) build/$(target)
 
 *.o: *.c
-	gcc $^ -c -o 
+	gcc $^ -c -g
 
 clean:
-	rm $(obj) test
+	rm ./build/$(target) *.o
