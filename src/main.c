@@ -26,7 +26,7 @@ int sock_bind_inet(int sockfd, int port) {
     return bind(sockfd,(struct sockaddr*)&addr, sizeof(addr));
 }
 
-void main(void) {
+int main(void) {
     int tcp_sock = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, IPPROTO_TCP);
 
     vector pollfd_vec = vector_new(sizeof(struct pollfd), INITIAL_CONN_SIZE);
@@ -116,7 +116,7 @@ void main(void) {
         size = vector_size(clients_vec);
         for (int i = 1; i < size; i++) {
             client_t *tmp_client = vector_get(clients_vec, i);
-
+            
         }
 
     }
