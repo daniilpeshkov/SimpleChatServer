@@ -32,11 +32,10 @@ void main(void) {
     vector pollfd_vec = vector_new(sizeof(struct pollfd), INITIAL_CONN_SIZE);
     vector clients_vec = vector_new(sizeof(client_t), INITIAL_CONN_SIZE);
 
-    client_t tmp_client;
 
  // empty client because pollfd_vec[i] corresponds to clients_vec[i]
  // but pollfd_vec[0] is accept socket
-    vector_append(clients_vec, &tmp_client);
+    vector_append(clients_vec, client_new(0));
 
 
     if (tcp_sock == -1) {
@@ -61,7 +60,7 @@ void main(void) {
 
     struct sockaddr addr_in;
     socklen_t len = sizeof(addr_in);
-
+    char frame_buf[sizeof(frame_t)];
     while (1) {
         int eventn = poll(vector_get(pollfd_vec, 0), vector_size(pollfd_vec), -1);
         if (eventn == -1) {
@@ -79,9 +78,8 @@ void main(void) {
                 perror("something wrong");
                 exit(EXIT_FAILURE);
             }
-
-            vector_append(clients_vec, calloc(1, sizeof(client_t)));
-            ((client_t*)vector_get(clients_vec, vector_size(clients_vec) - 1))->sock_fd = client_fd;
+            client_t* tmp_client_ptr = client_new();
+            vector_append(clients_vec, &tmp_client_ptr); 
 
             memset(&tmp_pollfd, 0, sizeof(tmp_pollfd));
             tmp_pollfd.fd = client_fd;
@@ -93,11 +91,13 @@ void main(void) {
         size_t size = vector_size(pollfd_vec);
 
         for (size_t i = 1; i < size && eventn != 0; i++) { // in loop
-            struct pollfd* tmp_pollfd = vector_get(pollfd_vec, i);
+            struct pollfd *tmp_pollfd_ptr = vector_get(pollfd_vec, i);
+            client_t *tmp_client_ptr = *((client_t**)vector_get(clients_vec, i));
 
-            if (tmp_pollfd->revents & POLLERR || tmp_pollfd->revents & POLLHUP) {
+            if (tmp_pollfd_ptr->revents & POLLERR || tmp_pollfd_ptr->revents & POLLHUP) {
                 //USER disconnected
-                close(((client_t*)vector_get(clients_vec, i))->sock_fd);
+                close(tmp_pollfd_ptr->fd);
+                client_free(tmp_client_ptr);
                 vector_remove(pollfd_vec, i);
                 vector_remove(clients_vec, i);
                 eventn -= 1;
@@ -105,8 +105,9 @@ void main(void) {
                 continue;
             }
 
-            if (tmp_pollfd->revents & POLLIN) {
-                event_new_data_process(vector_get(clients_vec, i));
+            if (tmp_pollfd_ptr->revents & POLLIN) {
+                int len = recv(tmp_pollfd_ptr->fd, frame_buf, sizeof(frame_buf), 0);
+                client_process_data(tmp_client_ptr, frame_buf, len);
                 eventn -= 1;
                 continue;
             }
@@ -116,10 +117,6 @@ void main(void) {
         for (int i = 1; i < size; i++) {
             client_t *tmp_client = vector_get(clients_vec, i);
 
-            if (tmp_client->message_received) {
-                tmp_client->message_received = 0;
-                //TODO process new message
-            }
         }
 
     }
