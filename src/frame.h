@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #define MAX_FRAME_LEN	257
+#define TAG_MASK		0x1f
 
 typedef struct {
 	char 			tag;
@@ -23,7 +24,7 @@ typedef struct {
 /* Next append call after finished frame will switch buffers, and previous received frame will be anavaliable */
 size_t frame_append(frame_t *frame, char *data, size_t len, char **first_unsused_char);
 
-frame_t* frame_new();
+void frame_init(frame_t *frame);
 
 void frame_free(frame_t *frame);
 

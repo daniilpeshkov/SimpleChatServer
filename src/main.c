@@ -35,7 +35,10 @@ int main(void) {
 
  // empty client because pollfd_vec[i] corresponds to clients_vec[i]
  // but pollfd_vec[0] is accept socket
-    vector_append(clients_vec, client_new(0));
+
+    client_t* tmp_client_ptr = malloc(sizeof(client_t));
+    client_init(tmp_client_ptr);
+    vector_append(clients_vec, tmp_client_ptr);
 
 
     if (tcp_sock == -1) {
@@ -78,7 +81,8 @@ int main(void) {
                 perror("something wrong");
                 exit(EXIT_FAILURE);
             }
-            client_t* tmp_client_ptr = client_new();
+            tmp_client_ptr = malloc(sizeof(client_t));
+            client_init(tmp_client_ptr);
             vector_append(clients_vec, &tmp_client_ptr); 
 
             memset(&tmp_pollfd, 0, sizeof(tmp_pollfd));

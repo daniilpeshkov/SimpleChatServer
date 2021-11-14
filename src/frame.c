@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #define HAS_NEXT(ctl) ((ctl & 0x80) >> 7)
-#define TAG(ctl) (ctl & 0x1f)
+#define TAG(ctl) (ctl & TAG_MASK)
 
 size_t frame_append(frame_t *frame, char *data, size_t len, char **first_unsused_char) {
     *first_unsused_char = NULL;
@@ -41,8 +41,7 @@ size_t frame_append(frame_t *frame, char *data, size_t len, char **first_unsused
     return 0;
 }
 
-frame_t* frame_new() {
-    frame_t *frame = malloc(sizeof(frame_t));
+void frame_init(frame_t *frame) {
     frame->cur_len = 0;
     frame->has_next = 0;
     frame->filled = 0;
@@ -59,7 +58,6 @@ int frame_get_data(frame_t *frame, frame_data_t *f_data) {
 
 
 void frame_free(frame_t *frame) {
-    free(frame);
 }
 
 inline int frame_filled(frame_t *frame) {

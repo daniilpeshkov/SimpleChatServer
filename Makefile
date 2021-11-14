@@ -129,65 +129,101 @@ simple_server/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/build
 .PHONY : simple_server/fast
 
-# target to build an object file
-src/client.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/client.o
+src/client.o: src/client.c.o
 .PHONY : src/client.o
 
-# target to preprocess a source file
-src/client.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/client.i
+# target to build an object file
+src/client.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/client.c.o
+.PHONY : src/client.c.o
+
+src/client.i: src/client.c.i
 .PHONY : src/client.i
 
-# target to generate assembly for a file
-src/client.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/client.s
+# target to preprocess a source file
+src/client.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/client.c.i
+.PHONY : src/client.c.i
+
+src/client.s: src/client.c.s
 .PHONY : src/client.s
 
-# target to build an object file
-src/frame.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/frame.o
+# target to generate assembly for a file
+src/client.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/client.c.s
+.PHONY : src/client.c.s
+
+src/frame.o: src/frame.c.o
 .PHONY : src/frame.o
 
-# target to preprocess a source file
-src/frame.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/frame.i
+# target to build an object file
+src/frame.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/frame.c.o
+.PHONY : src/frame.c.o
+
+src/frame.i: src/frame.c.i
 .PHONY : src/frame.i
 
-# target to generate assembly for a file
-src/frame.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/frame.s
+# target to preprocess a source file
+src/frame.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/frame.c.i
+.PHONY : src/frame.c.i
+
+src/frame.s: src/frame.c.s
 .PHONY : src/frame.s
 
-# target to build an object file
-src/main.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/main.o
+# target to generate assembly for a file
+src/frame.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/frame.c.s
+.PHONY : src/frame.c.s
+
+src/main.o: src/main.c.o
 .PHONY : src/main.o
 
-# target to preprocess a source file
-src/main.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/main.i
+# target to build an object file
+src/main.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/main.c.o
+.PHONY : src/main.c.o
+
+src/main.i: src/main.c.i
 .PHONY : src/main.i
 
-# target to generate assembly for a file
-src/main.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/main.s
+# target to preprocess a source file
+src/main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/main.c.i
+.PHONY : src/main.c.i
+
+src/main.s: src/main.c.s
 .PHONY : src/main.s
 
-# target to build an object file
-src/vector.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/vector.o
+# target to generate assembly for a file
+src/main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/main.c.s
+.PHONY : src/main.c.s
+
+src/vector.o: src/vector.c.o
 .PHONY : src/vector.o
 
-# target to preprocess a source file
-src/vector.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/vector.i
+# target to build an object file
+src/vector.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/vector.c.o
+.PHONY : src/vector.c.o
+
+src/vector.i: src/vector.c.i
 .PHONY : src/vector.i
 
-# target to generate assembly for a file
-src/vector.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/vector.s
+# target to preprocess a source file
+src/vector.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/vector.c.i
+.PHONY : src/vector.c.i
+
+src/vector.s: src/vector.c.s
 .PHONY : src/vector.s
+
+# target to generate assembly for a file
+src/vector.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/vector.c.s
+.PHONY : src/vector.c.s
 
 # Help Target
 help:
