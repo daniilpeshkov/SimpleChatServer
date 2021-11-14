@@ -63,7 +63,7 @@ int main(void) {
 
     struct sockaddr addr_in;
     socklen_t len = sizeof(addr_in);
-    char frame_buf[sizeof(frame_t)];
+    unsigned char frame_buf[sizeof(frame_t)];
     while (1) {
         int eventn = poll(vector_get(pollfd_vec, 0), vector_size(pollfd_vec), -1);
         if (eventn == -1) {

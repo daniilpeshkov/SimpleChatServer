@@ -33,6 +33,7 @@ int vector_append(vector self, void *elem) {
     }
     memcpy(vec->arr + (vec->size * vec->base_size), elem, vec->base_size);
     vec->size++;
+    return 1;
 }
 
 size_t vector_size(vector self) {

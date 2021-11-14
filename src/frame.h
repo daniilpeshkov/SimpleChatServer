@@ -6,15 +6,15 @@
 #define TAG_MASK		0x1f
 
 typedef struct {
-	char 			tag;
+	unsigned char 	tag;
 	unsigned char 	len;
-	char 			*data;
+	unsigned char 	*data;
 } frame_data_t;
 
 typedef struct {
     size_t			cur_len;
     size_t			bytes_left;
-    char 			frame[MAX_FRAME_LEN];
+    unsigned char 	frame[MAX_FRAME_LEN];
 	int 			has_next;
 	int 			filled;
 } frame_t;
@@ -22,7 +22,7 @@ typedef struct {
 
 /* Returns number of unused chars. If it is not zero then frame is recieved fully */
 /* Next append call after finished frame will switch buffers, and previous received frame will be anavaliable */
-size_t frame_append(frame_t *frame, char *data, size_t len, char **first_unsused_char);
+size_t frame_append(frame_t *frame, unsigned char *data, size_t len, unsigned char **first_unsused_char);
 
 void frame_init(frame_t *frame);
 

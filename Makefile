@@ -201,6 +201,30 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/message.o: src/message.c.o
+.PHONY : src/message.o
+
+# target to build an object file
+src/message.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/message.c.o
+.PHONY : src/message.c.o
+
+src/message.i: src/message.c.i
+.PHONY : src/message.i
+
+# target to preprocess a source file
+src/message.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/message.c.i
+.PHONY : src/message.c.i
+
+src/message.s: src/message.c.s
+.PHONY : src/message.s
+
+# target to generate assembly for a file
+src/message.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/message.c.s
+.PHONY : src/message.c.s
+
 src/vector.o: src/vector.c.o
 .PHONY : src/vector.o
 
@@ -243,6 +267,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/message.o"
+	@echo "... src/message.i"
+	@echo "... src/message.s"
 	@echo "... src/vector.o"
 	@echo "... src/vector.i"
 	@echo "... src/vector.s"

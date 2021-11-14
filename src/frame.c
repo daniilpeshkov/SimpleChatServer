@@ -6,7 +6,7 @@
 #define HAS_NEXT(ctl) ((ctl & 0x80) >> 7)
 #define TAG(ctl) (ctl & TAG_MASK)
 
-size_t frame_append(frame_t *frame, char *data, size_t len, char **first_unsused_char) {
+size_t frame_append(frame_t *frame, unsigned char *data, size_t len, unsigned char **first_unsused_char) {
     *first_unsused_char = NULL;
     if (len == 0) return 0;
 
@@ -21,6 +21,7 @@ size_t frame_append(frame_t *frame, char *data, size_t len, char **first_unsused
             len--;
             if (len == 0) return 0;
         }
+        frame->has_next = HAS_NEXT(frame->frame[0]);
         frame->bytes_left = frame->frame[1];
     }
     size_t copy_n = (len <= frame->bytes_left ? len : frame->bytes_left);
@@ -32,7 +33,6 @@ size_t frame_append(frame_t *frame, char *data, size_t len, char **first_unsused
 
     if (frame->bytes_left == 0) {
         frame->filled = 1;
-        frame->has_next = HAS_NEXT(frame->frame[0]);
 
         if (len != 0) *first_unsused_char = data; 
         return len;
@@ -45,7 +45,6 @@ void frame_init(frame_t *frame) {
     frame->cur_len = 0;
     frame->has_next = 0;
     frame->filled = 0;
-    return frame;
 }
 
 int frame_get_data(frame_t *frame, frame_data_t *f_data) {
