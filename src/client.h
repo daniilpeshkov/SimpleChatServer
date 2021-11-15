@@ -7,10 +7,15 @@
 #include "vector.h"
 #include "message.h"
 
+typedef enum {
+    NOT_AUTHENTICATED, AUTH_OK 
+} client_state_t;
+
 typedef struct {
     frame_t     frame; 
     int         message_received;
     message_t   msg;
+    client_state_t state;
 } client_t;
 
 void client_init(client_t* client);

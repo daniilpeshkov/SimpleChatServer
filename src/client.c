@@ -11,6 +11,7 @@ void client_free(client_t *client) {
 void client_init(client_t* client) {
     frame_init(&client->frame);
     message_init(&client->msg);
+    client->state = NOT_AUTHENTICATED;
     client->message_received = 0;
 }
 
@@ -27,20 +28,9 @@ void client_process_data(client_t *client, unsigned char *data, size_t len) {
             message_append(&client->msg, &f_data);
             
             if (!frame_has_next(&client->frame)) {
-                unsigned char *data;
-
-                for (int i = 0; i < TAG_MASK; i++) {
-                    size_t len = message_get_tag(&client->msg, i, &data);
-                    if (len != 0) {
-                        printf("tag %d: %lu\n", i, len);
-                        for (size_t j = 0; j < len; j++) {
-                            printf("%3x", data[j]);
-                        }
-                        printf("\n");
-                    }
-                }
-                printf("\n");
-                message_reset(&client->msg);
+                client->message_received = 1;
+                return;
+                // message_reset(&client->msg);
             }
         }
     }

@@ -5,7 +5,7 @@
 
 typedef void* vector;
 
-vector vector_new(unsigned int base_size, unsigned int initial_cap);
+vector vector_new(unsigned int base_size, size_t initial_cap);
 
 void* vector_get(vector self, unsigned int index);
 int vector_append(vector self, void *elem);

@@ -7,12 +7,13 @@
 #define TAG(ctl) (ctl & TAG_MASK)
 
 size_t frame_append(frame_t *frame, unsigned char *data, size_t len, unsigned char **first_unsused_char) {
-    *first_unsused_char = NULL;
+    // *first_unsused_char = NULL;
     if (len == 0) return 0;
 
     if (frame->filled == 1) {
         frame->cur_len = 0;
         frame->has_next = 0;
+        frame->filled = 0;
     }
 
     if (frame->cur_len < 2) {

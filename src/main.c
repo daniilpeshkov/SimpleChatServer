@@ -10,6 +10,7 @@
 
 #include "vector.h"
 #include "client.h"
+#include "requests.h"
 
 #define LISTEN_SOCK_INDEX 0
 
@@ -99,7 +100,7 @@ int main(void) {
             client_t *tmp_client_ptr = *((client_t**)vector_get(clients_vec, i));
 
             if (tmp_pollfd_ptr->revents & POLLERR || tmp_pollfd_ptr->revents & POLLHUP) {
-                //USER disconnected
+                printf("user disconnected!\n");
                 close(tmp_pollfd_ptr->fd);
                 client_free(tmp_client_ptr);
                 vector_remove(pollfd_vec, i);
@@ -119,8 +120,33 @@ int main(void) {
 
         size = vector_size(clients_vec);
         for (int i = 1; i < size; i++) {
-            client_t *tmp_client = vector_get(clients_vec, i);
-            
+            client_t *tmp_client_ptr = *((client_t**)vector_get(clients_vec, i));
+            struct pollfd *tmp_pollfd_ptr = vector_get(pollfd_vec, i);
+
+            if (tmp_client_ptr->message_received) {
+                tmp_client_ptr->message_received = 0;
+
+                switch (tmp_client_ptr->state) {
+                case NOT_AUTHENTICATED:
+                    if (!requests_is_login_request(&tmp_client_ptr->msg)) break;
+                    //if name != ok  reponse name_used or something else
+
+                    message_t msg;
+                    message_init(&msg);
+                    requests_make_login_response(&msg, LOGIN_OK);
+                    vector raw = message_convert_to_raw(&msg);
+                    send(tmp_pollfd_ptr->fd, vector_get(raw, 0), vector_size(raw), 0);
+                    vector_free(&raw);
+
+                    break;
+                case AUTH_OK:
+                    //TODO parse message
+                    break;
+                }
+
+
+                message_reset(&tmp_client_ptr->msg);
+            }
         }
 
     }

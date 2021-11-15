@@ -225,6 +225,54 @@ src/message.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/message.c.s
 .PHONY : src/message.c.s
 
+src/name_list.o: src/name_list.c.o
+.PHONY : src/name_list.o
+
+# target to build an object file
+src/name_list.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/name_list.c.o
+.PHONY : src/name_list.c.o
+
+src/name_list.i: src/name_list.c.i
+.PHONY : src/name_list.i
+
+# target to preprocess a source file
+src/name_list.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/name_list.c.i
+.PHONY : src/name_list.c.i
+
+src/name_list.s: src/name_list.c.s
+.PHONY : src/name_list.s
+
+# target to generate assembly for a file
+src/name_list.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/name_list.c.s
+.PHONY : src/name_list.c.s
+
+src/requests.o: src/requests.c.o
+.PHONY : src/requests.o
+
+# target to build an object file
+src/requests.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/requests.c.o
+.PHONY : src/requests.c.o
+
+src/requests.i: src/requests.c.i
+.PHONY : src/requests.i
+
+# target to preprocess a source file
+src/requests.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/requests.c.i
+.PHONY : src/requests.c.i
+
+src/requests.s: src/requests.c.s
+.PHONY : src/requests.s
+
+# target to generate assembly for a file
+src/requests.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simple_server.dir/build.make CMakeFiles/simple_server.dir/src/requests.c.s
+.PHONY : src/requests.c.s
+
 src/vector.o: src/vector.c.o
 .PHONY : src/vector.o
 
@@ -270,6 +318,12 @@ help:
 	@echo "... src/message.o"
 	@echo "... src/message.i"
 	@echo "... src/message.s"
+	@echo "... src/name_list.o"
+	@echo "... src/name_list.i"
+	@echo "... src/name_list.s"
+	@echo "... src/requests.o"
+	@echo "... src/requests.i"
+	@echo "... src/requests.s"
 	@echo "... src/vector.o"
 	@echo "... src/vector.i"
 	@echo "... src/vector.s"

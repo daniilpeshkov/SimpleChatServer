@@ -10,7 +10,7 @@ typedef struct {
     size_t cap;
 } vector_t;
 
-vector vector_new(unsigned int base_size, unsigned int initial_cap) {
+vector vector_new(unsigned int base_size, size_t initial_cap) {
     vector_t* vec = malloc(sizeof(vector_t));
     vec->base_size = base_size;
     vec->cap = initial_cap;
