@@ -18,6 +18,8 @@ void message_init(message_t *msg);
 
 void message_append(message_t *msg, frame_data_t *f);
 
+void message_append_var(message_t *msg, unsigned char tag, unsigned char *data, size_t len);
+
 void message_reset(message_t *msg);
 
 void message_print(message_t *msg);

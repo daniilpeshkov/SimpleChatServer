@@ -125,7 +125,7 @@ int main(void) {
 
             if (tmp_client_ptr->message_received) {
                 tmp_client_ptr->message_received = 0;
-
+                // message_print(&tmp_client_ptr->msg);
                 switch (tmp_client_ptr->state) {
                 case NOT_AUTHENTICATED:
                     if (!requests_is_login_request(&tmp_client_ptr->msg)) break;
@@ -136,15 +136,21 @@ int main(void) {
                     requests_make_login_response(&msg, LOGIN_OK);
                     vector raw = message_convert_to_raw(&msg);
                     send(tmp_pollfd_ptr->fd, vector_get(raw, 0), vector_size(raw), 0);
-                    vector_free(&raw);
-
+                    vector_free(raw);
+                    message_reset(&msg);
+                    tmp_client_ptr->state = AUTH_OK;
                     break;
                 case AUTH_OK:
-                    //TODO parse message
+                    if (requests_is_text_message(&tmp_client_ptr->msg)) {
+                        message_t msg;
+                        requests_make_text_message_response(&msg, MESSAGE_SENT);
+                        vector raw = message_convert_to_raw(&msg);
+                        send(tmp_pollfd_ptr->fd, vector_get(raw, 0), vector_size(raw), 0);
+                        vector_free(raw);
+                        message_reset(&msg);
+                    }
                     break;
                 }
-
-
                 message_reset(&tmp_client_ptr->msg);
             }
         }
