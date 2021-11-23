@@ -11,6 +11,7 @@
 #include "vector.h"
 #include "client.h"
 #include "requests.h"
+#include "name_list.h"
 
 #define LISTEN_SOCK_INDEX 0
 
@@ -29,10 +30,10 @@ int sock_bind_inet(int sockfd, int port) {
 
 int main(void) {
     int tcp_sock = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, IPPROTO_TCP);
-
+    name_list_t name_list;
     vector pollfd_vec = vector_new(sizeof(struct pollfd), INITIAL_CONN_SIZE);
     vector clients_vec = vector_new(sizeof(client_t), INITIAL_CONN_SIZE);
-
+    name_list_init(&name_list, INITIAL_CONN_SIZE);
 
  // empty client because pollfd_vec[i] corresponds to clients_vec[i]
  // but pollfd_vec[0] is accept socket
@@ -40,7 +41,6 @@ int main(void) {
     client_t* tmp_client_ptr = malloc(sizeof(client_t));
     client_init(tmp_client_ptr);
     vector_append(clients_vec, tmp_client_ptr);
-
 
     if (tcp_sock == -1) {
         perror("can't create socket");
@@ -105,6 +105,7 @@ int main(void) {
                 client_free(tmp_client_ptr);
                 vector_remove(pollfd_vec, i);
                 vector_remove(clients_vec, i);
+                name_list_remove(&name_list, i);
                 eventn -= 1;
                 i -= 1;
                 continue;
@@ -119,22 +120,38 @@ int main(void) {
         }
 
         size = vector_size(clients_vec);
-        for (int i = 1; i < size; i++) {
+        for (size_t i = 1; i < size; i++) {
             client_t *tmp_client_ptr = *((client_t**)vector_get(clients_vec, i));
             struct pollfd *tmp_pollfd_ptr = vector_get(pollfd_vec, i);
 
             if (tmp_client_ptr->message_received) {
                 tmp_client_ptr->message_received = 0;
-                // message_print(&tmp_client_ptr->msg);
+
                 switch (tmp_client_ptr->state) {
                 case NOT_AUTHENTICATED:
                     if (!requests_is_login_request(&tmp_client_ptr->msg)) break;
-                    //if name != ok  reponse name_used or something else
+
+                    unsigned char *name;
+                    size_t name_len = message_get_tag(&tmp_client_ptr->msg, TAG_NAME, &name);
+                    if (!name_list_append_if_not_exist(&name_list, name, name_len)) break;
 
                     message_t msg;
                     message_init(&msg);
-                    requests_make_login_response(&msg, LOGIN_OK);
+
+                    requests_make_login_notification_response(&msg, USER_CONNECTED, name, name_len);
                     vector raw = message_convert_to_raw(&msg);
+                    
+                    for (size_t j = 1; j < size; j++) {
+                        if (i == j) continue;
+                        struct pollfd *resp_pollfd_ptr = vector_get(pollfd_vec, j);
+                        send(resp_pollfd_ptr->fd, vector_get(raw, 0), vector_size(raw), 0);
+                    }
+
+                    vector_free(raw);
+                    message_reset(&msg);
+
+                    requests_make_login_response(&msg, LOGIN_OK);
+                    raw = message_convert_to_raw(&msg);
                     send(tmp_pollfd_ptr->fd, vector_get(raw, 0), vector_size(raw), 0);
                     vector_free(raw);
                     message_reset(&msg);

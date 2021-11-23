@@ -16,6 +16,10 @@
 #define NAME_USED           2
 #define NAME_WRONG_FORMAT   3
 
+#define SYS_LOGIN_NOTIFICATION  3
+#define USER_CONNECTED          1
+#define	USER_DISCONECTED        2
+
 int requests_is_login_request(message_t *msg);
 
 int requests_is_text_message(message_t *msg);
@@ -23,5 +27,7 @@ int requests_is_text_message(message_t *msg);
 void requests_make_login_response(message_t *msg, unsigned char login_code);
 
 void requests_make_text_message_response(message_t *msg, unsigned char response_code);
+
+void requests_make_login_notification_response(message_t *msg, unsigned char response_code, unsigned char *name, size_t len);
 
 #endif
