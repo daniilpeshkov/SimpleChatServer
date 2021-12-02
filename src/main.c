@@ -153,21 +153,15 @@ int main(void) {
                     requests_make_login_response(&msg, LOGIN_OK);
                     raw = message_convert_to_raw(&msg);
                     send(tmp_pollfd_ptr->fd, vector_get(raw, 0), vector_size(raw), 0);
-                    vector_free(raw);
-                    message_reset(&msg);
-                    tmp_client_ptr->state = AUTH_OK;
+                    vector_free(&raw);
+
                     break;
                 case AUTH_OK:
-                    if (requests_is_text_message(&tmp_client_ptr->msg)) {
-                        message_t msg;
-                        requests_make_text_message_response(&msg, MESSAGE_SENT);
-                        vector raw = message_convert_to_raw(&msg);
-                        send(tmp_pollfd_ptr->fd, vector_get(raw, 0), vector_size(raw), 0);
-                        vector_free(raw);
-                        message_reset(&msg);
-                    }
+                    //TODO parse message
                     break;
                 }
+
+
                 message_reset(&tmp_client_ptr->msg);
             }
         }

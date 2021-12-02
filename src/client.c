@@ -5,7 +5,6 @@
 
 void client_free(client_t *client) {
     frame_free(&client->frame);
-    message_reset(&client->msg);
     free(client);
 };
 

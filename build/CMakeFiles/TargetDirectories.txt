@@ -1,0 +1,3 @@
+/home/daniil/SimpleChatServer_C_impl/build/CMakeFiles/simple_server.dir
+/home/daniil/SimpleChatServer_C_impl/build/CMakeFiles/edit_cache.dir
+/home/daniil/SimpleChatServer_C_impl/build/CMakeFiles/rebuild_cache.dir

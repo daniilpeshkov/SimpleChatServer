@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/simple_server.dir/src/client.c.o CMakeFiles/simple_server.dir/src/frame.c.o CMakeFiles/simple_server.dir/src/main.cpp.o CMakeFiles/simple_server.dir/src/message.c.o CMakeFiles/simple_server.dir/src/name_list.c.o CMakeFiles/simple_server.dir/src/requests.c.o CMakeFiles/simple_server.dir/src/vector.c.o -o simple_server 

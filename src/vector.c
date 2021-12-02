@@ -19,7 +19,7 @@ vector vector_new(unsigned int base_size, size_t initial_cap) {
     return (vector)vec;
 }
 
-void* vector_get(vector self, size_t index) {
+void* vector_get(vector self, unsigned int index) {
     vector_t *vec = (vector_t*)self;
     if (index >= vec->size) return NULL;
     return vec->arr + (vec->base_size * index);
