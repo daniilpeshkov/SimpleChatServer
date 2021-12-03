@@ -38,6 +38,7 @@ void message_reset(message_t *msg) {
             msg->tag_exist[i] = 0;
         }
     }
+    msg->tag_cnt = 0;
 }
 
 void message_print(message_t *msg) {
@@ -62,6 +63,24 @@ vector message_convert_to_raw(message_t *msg) {
     vector raw = vector_new(sizeof(char), 100);
     unsigned int tag_cnt = msg->tag_cnt;
 
+    for (unsigned char i = 0; i < TAG_N; i++) {
+        if (!msg->tag_exist[i]) continue;
+        tag_cnt -= 1;
+        size_t tag_len = vector_size(msg->tag_data_vec[i]);
+        size_t data_index = 0;
+        while (tag_len != 0) {
+            unsigned char elem = (tag_len > 255 || tag_cnt > 0 ? 0x80 : 0) | i;
+            vector_append(raw, &elem);
+            unsigned char copy_len = (tag_len > 255 ? 255 : tag_len);
+            vector_append(raw, &copy_len);
+            vector_append_arr(raw, vector_get(msg->tag_data_vec[i], data_index), copy_len);
+            // for (int j = 0; j < copy_len; j++) {
+            //     vector_append(raw, vector_get(msg->tag_data_vec[i], data_index++));
+            // }
+            data_index += copy_len;
+            tag_len -= copy_len;
+        }
+    }
 
     return raw;
 }

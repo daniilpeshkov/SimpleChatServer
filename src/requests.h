@@ -5,6 +5,7 @@
 
 #define TAG_SYS         1
 #define TAG_NAME        6
+#define TAG_TEXT        2
 
 #define SYS_LOGIN_REQUEST   1
 #define LOGIN_OK            1
@@ -14,6 +15,9 @@
 #define SYS_LOGIN_NOTIFICATION  3
 #define USER_CONNECTED          1
 #define	USER_DISCONECTED        2
+
+#define SYS_TEXT_MESSAGE        4
+
 
 int requests_is_login_request(message_t *msg);
 

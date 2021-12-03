@@ -19,7 +19,7 @@ vector vector_new(unsigned int base_size, size_t initial_cap) {
     return (vector)vec;
 }
 
-void* vector_get(vector self, unsigned int index) {
+void* vector_get(vector self, size_t index) {
     vector_t *vec = (vector_t*)self;
     if (index >= vec->size) return NULL;
     return vec->arr + (vec->base_size * index);
@@ -31,7 +31,8 @@ int vector_append(vector self, void *elem) {
         vec->cap *= 2;
         vec->arr = realloc(vec->arr, vec->base_size * vec->cap);
     }
-    memcpy(vec->arr + (vec->size * vec->base_size), elem, vec->base_size);
+    if (elem != NULL)
+        memcpy(vec->arr + (vec->size * vec->base_size), elem, vec->base_size);
     vec->size++;
     return 1;
 }
@@ -45,10 +46,46 @@ void vector_free(vector self) {
     free(self);
 }
 
-int vector_remove(vector self, unsigned int index) {
+int vector_remove(vector self, size_t index) {
     vector_t *vec = (vector_t*)self;
     if (index >= vec->size) return 0;
     vec->size -= 1;    
     memcpy(vec->arr + vec->base_size * index, vec->arr + vec->base_size * vec->size, vec->base_size);
+    return 1;
+}
+
+int vector_set(vector self, size_t index, void *val) {
+    vector_t *vec = (vector_t*)self;
+    if (index >= vec->size) return 0;
+    memcpy(vec->arr + index * vec->base_size, val, vec->base_size);
+    return 1;
+}
+
+int vector_append_vec(vector self, vector n) {
+    vector_t *vec = (vector_t*)self;
+    vector_t *append_vec = (vector_t*)n;
+
+    if (vec->base_size != append_vec->base_size) return 0;
+
+    int ncap = append_vec->size - (vec->cap - vec->size);
+    if (ncap > 0) {
+        vec->cap += ncap;
+        vec->arr = realloc(vec->arr, vec->cap * vec->base_size);
+    }
+    memcpy(vec->arr + vec->size * vec->base_size, append_vec->arr, append_vec->size * append_vec->base_size);
+    vec->size += append_vec->size;
+    return 1;
+}
+
+int vector_append_arr(vector self, void* arr, size_t n_elem) {
+    vector_t *vec = (vector_t*)self;
+
+    int ncap = n_elem - (vec->cap - vec->size);
+    if (ncap > 0) {
+        vec->cap += ncap;
+        vec->arr = realloc(vec->arr, vec->cap * vec->base_size);
+    }
+    memcpy(vec->arr + vec->size * vec->base_size, arr, n_elem * vec->base_size);
+    vec->size += n_elem;
     return 1;
 }

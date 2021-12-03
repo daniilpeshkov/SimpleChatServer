@@ -25,12 +25,12 @@ void client_process_data(client_t *client, unsigned char *data, size_t len) {
         if (frame_filled(&client->frame)) { //frame ready
             frame_data_t f_data;
             frame_get_data(&client->frame, &f_data);
-            message_append(&client->msg, &f_data);
+            // message_append(&client->msg, &f_data);
+            message_append_var(&client->msg, f_data.tag, f_data.data, f_data.len);
             
             if (!frame_has_next(&client->frame)) {
                 client->message_received = 1;
                 return;
-                // message_reset(&client->msg);
             }
         }
     }

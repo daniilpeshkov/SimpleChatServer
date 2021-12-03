@@ -1,37 +1,37 @@
 [
 {
   "directory": "/home/daniil/SimpleChatServer_C_impl/build",
-  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -fpermissive -o CMakeFiles/simple_server.dir/src/client.c.o -c /home/daniil/SimpleChatServer_C_impl/src/client.c",
+  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -o CMakeFiles/simple_server.dir/src/client.c.o -c /home/daniil/SimpleChatServer_C_impl/src/client.c",
   "file": "/home/daniil/SimpleChatServer_C_impl/src/client.c"
 },
 {
   "directory": "/home/daniil/SimpleChatServer_C_impl/build",
-  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -fpermissive -o CMakeFiles/simple_server.dir/src/frame.c.o -c /home/daniil/SimpleChatServer_C_impl/src/frame.c",
+  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -o CMakeFiles/simple_server.dir/src/frame.c.o -c /home/daniil/SimpleChatServer_C_impl/src/frame.c",
   "file": "/home/daniil/SimpleChatServer_C_impl/src/frame.c"
 },
 {
   "directory": "/home/daniil/SimpleChatServer_C_impl/build",
-  "command": "/usr/bin/c++   -g -Wall -ggdb -fpermissive -o CMakeFiles/simple_server.dir/src/main.cpp.o -c /home/daniil/SimpleChatServer_C_impl/src/main.cpp",
-  "file": "/home/daniil/SimpleChatServer_C_impl/src/main.cpp"
+  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -o CMakeFiles/simple_server.dir/src/main.c.o -c /home/daniil/SimpleChatServer_C_impl/src/main.c",
+  "file": "/home/daniil/SimpleChatServer_C_impl/src/main.c"
 },
 {
   "directory": "/home/daniil/SimpleChatServer_C_impl/build",
-  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -fpermissive -o CMakeFiles/simple_server.dir/src/message.c.o -c /home/daniil/SimpleChatServer_C_impl/src/message.c",
+  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -o CMakeFiles/simple_server.dir/src/message.c.o -c /home/daniil/SimpleChatServer_C_impl/src/message.c",
   "file": "/home/daniil/SimpleChatServer_C_impl/src/message.c"
 },
 {
   "directory": "/home/daniil/SimpleChatServer_C_impl/build",
-  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -fpermissive -o CMakeFiles/simple_server.dir/src/name_list.c.o -c /home/daniil/SimpleChatServer_C_impl/src/name_list.c",
+  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -o CMakeFiles/simple_server.dir/src/name_list.c.o -c /home/daniil/SimpleChatServer_C_impl/src/name_list.c",
   "file": "/home/daniil/SimpleChatServer_C_impl/src/name_list.c"
 },
 {
   "directory": "/home/daniil/SimpleChatServer_C_impl/build",
-  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -fpermissive -o CMakeFiles/simple_server.dir/src/requests.c.o -c /home/daniil/SimpleChatServer_C_impl/src/requests.c",
+  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -o CMakeFiles/simple_server.dir/src/requests.c.o -c /home/daniil/SimpleChatServer_C_impl/src/requests.c",
   "file": "/home/daniil/SimpleChatServer_C_impl/src/requests.c"
 },
 {
   "directory": "/home/daniil/SimpleChatServer_C_impl/build",
-  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -fpermissive -o CMakeFiles/simple_server.dir/src/vector.c.o -c /home/daniil/SimpleChatServer_C_impl/src/vector.c",
+  "command": "/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0   -g -Wall -ggdb -o CMakeFiles/simple_server.dir/src/vector.c.o -c /home/daniil/SimpleChatServer_C_impl/src/vector.c",
   "file": "/home/daniil/SimpleChatServer_C_impl/src/vector.c"
 }
 ]

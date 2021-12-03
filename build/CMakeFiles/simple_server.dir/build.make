@@ -97,19 +97,19 @@ CMakeFiles/simple_server.dir/src/frame.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/simple_server.dir/src/frame.c.s"
 	/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/daniil/SimpleChatServer_C_impl/src/frame.c -o CMakeFiles/simple_server.dir/src/frame.c.s
 
-CMakeFiles/simple_server.dir/src/main.cpp.o: CMakeFiles/simple_server.dir/flags.make
-CMakeFiles/simple_server.dir/src/main.cpp.o: ../src/main.cpp
-CMakeFiles/simple_server.dir/src/main.cpp.o: CMakeFiles/simple_server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/daniil/SimpleChatServer_C_impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/simple_server.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/simple_server.dir/src/main.cpp.o -MF CMakeFiles/simple_server.dir/src/main.cpp.o.d -o CMakeFiles/simple_server.dir/src/main.cpp.o -c /home/daniil/SimpleChatServer_C_impl/src/main.cpp
+CMakeFiles/simple_server.dir/src/main.c.o: CMakeFiles/simple_server.dir/flags.make
+CMakeFiles/simple_server.dir/src/main.c.o: ../src/main.c
+CMakeFiles/simple_server.dir/src/main.c.o: CMakeFiles/simple_server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/daniil/SimpleChatServer_C_impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/simple_server.dir/src/main.c.o"
+	/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/simple_server.dir/src/main.c.o -MF CMakeFiles/simple_server.dir/src/main.c.o.d -o CMakeFiles/simple_server.dir/src/main.c.o -c /home/daniil/SimpleChatServer_C_impl/src/main.c
 
-CMakeFiles/simple_server.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/simple_server.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/daniil/SimpleChatServer_C_impl/src/main.cpp > CMakeFiles/simple_server.dir/src/main.cpp.i
+CMakeFiles/simple_server.dir/src/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/simple_server.dir/src/main.c.i"
+	/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/daniil/SimpleChatServer_C_impl/src/main.c > CMakeFiles/simple_server.dir/src/main.c.i
 
-CMakeFiles/simple_server.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/simple_server.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/daniil/SimpleChatServer_C_impl/src/main.cpp -o CMakeFiles/simple_server.dir/src/main.cpp.s
+CMakeFiles/simple_server.dir/src/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/simple_server.dir/src/main.c.s"
+	/usr/bin/x86_64-pc-linux-gnu-gcc-11.1.0 $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/daniil/SimpleChatServer_C_impl/src/main.c -o CMakeFiles/simple_server.dir/src/main.c.s
 
 CMakeFiles/simple_server.dir/src/message.c.o: CMakeFiles/simple_server.dir/flags.make
 CMakeFiles/simple_server.dir/src/message.c.o: ../src/message.c
@@ -171,7 +171,7 @@ CMakeFiles/simple_server.dir/src/vector.c.s: cmake_force
 simple_server_OBJECTS = \
 "CMakeFiles/simple_server.dir/src/client.c.o" \
 "CMakeFiles/simple_server.dir/src/frame.c.o" \
-"CMakeFiles/simple_server.dir/src/main.cpp.o" \
+"CMakeFiles/simple_server.dir/src/main.c.o" \
 "CMakeFiles/simple_server.dir/src/message.c.o" \
 "CMakeFiles/simple_server.dir/src/name_list.c.o" \
 "CMakeFiles/simple_server.dir/src/requests.c.o" \
@@ -182,14 +182,14 @@ simple_server_EXTERNAL_OBJECTS =
 
 simple_server: CMakeFiles/simple_server.dir/src/client.c.o
 simple_server: CMakeFiles/simple_server.dir/src/frame.c.o
-simple_server: CMakeFiles/simple_server.dir/src/main.cpp.o
+simple_server: CMakeFiles/simple_server.dir/src/main.c.o
 simple_server: CMakeFiles/simple_server.dir/src/message.c.o
 simple_server: CMakeFiles/simple_server.dir/src/name_list.c.o
 simple_server: CMakeFiles/simple_server.dir/src/requests.c.o
 simple_server: CMakeFiles/simple_server.dir/src/vector.c.o
 simple_server: CMakeFiles/simple_server.dir/build.make
 simple_server: CMakeFiles/simple_server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/daniil/SimpleChatServer_C_impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable simple_server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/daniil/SimpleChatServer_C_impl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable simple_server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/simple_server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

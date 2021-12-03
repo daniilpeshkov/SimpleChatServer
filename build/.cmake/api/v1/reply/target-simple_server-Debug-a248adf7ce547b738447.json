@@ -51,10 +51,6 @@
 				{
 					"backtrace" : 2,
 					"fragment" : "-ggdb"
-				},
-				{
-					"backtrace" : 2,
-					"fragment" : "-fpermissive"
 				}
 			],
 			"language" : "C",
@@ -62,35 +58,11 @@
 			[
 				0,
 				1,
+				2,
 				3,
 				4,
 				5,
 				6
-			]
-		},
-		{
-			"compileCommandFragments" : 
-			[
-				{
-					"fragment" : "-g"
-				},
-				{
-					"backtrace" : 2,
-					"fragment" : "-Wall"
-				},
-				{
-					"backtrace" : 2,
-					"fragment" : "-ggdb"
-				},
-				{
-					"backtrace" : 2,
-					"fragment" : "-fpermissive"
-				}
-			],
-			"language" : "CXX",
-			"sourceIndexes" : 
-			[
-				2
 			]
 		}
 	],
@@ -108,7 +80,7 @@
 				"role" : "flags"
 			}
 		],
-		"language" : "CXX"
+		"language" : "C"
 	},
 	"name" : "simple_server",
 	"nameOnDisk" : "simple_server",
@@ -149,8 +121,8 @@
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 1,
-			"path" : "src/main.cpp",
+			"compileGroupIndex" : 0,
+			"path" : "src/main.c",
 			"sourceGroupIndex" : 0
 		},
 		{
