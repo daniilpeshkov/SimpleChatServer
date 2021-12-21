@@ -3,12 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct {
-    unsigned int base_size;
-    void *arr;
-    size_t size;
-    size_t cap;
-} vector_t;
 
 vector vector_new(unsigned int base_size, size_t initial_cap) {
     vector_t* vec = malloc(sizeof(vector_t));

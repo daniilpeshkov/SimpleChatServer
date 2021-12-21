@@ -8,19 +8,6 @@ void message_init(message_t *msg) {
     memset(msg->tag_exist, 0, sizeof(msg->tag_exist));
 }
 
-void message_append(message_t *msg, frame_data_t *f) {
-    if (f->len == 0) return;
-
-    if (!msg->tag_exist[f->tag]) {
-        msg->tag_data_vec[f->tag] = vector_new(sizeof(*f->data), f->len);
-        msg->tag_exist[f->tag] = 1;
-        msg->tag_cnt += 1;
-    }
-    for (size_t i = 0; i < f->len; i++) {
-        vector_append(msg->tag_data_vec[f->tag], &f->data[i]);
-    }
-}
-
 size_t message_get_tag(message_t *msg, unsigned char tag, unsigned char **tag_data_ptr) {
     if (tag > TAG_MASK) return 0;
     if (!msg->tag_exist[tag]) return 0;
@@ -83,4 +70,15 @@ vector message_convert_to_raw(message_t *msg) {
     }
 
     return raw;
+}
+
+void message_append(message_t *msg, unsigned char tag, unsigned char *data, size_t len) {
+    if (!msg->tag_exist[tag]) {
+        msg->tag_data_vec[tag] = vector_new(sizeof(*data), len);
+        msg->tag_exist[tag] = 1;
+        msg->tag_cnt += 1;
+    }
+    for (size_t i = 0; i < len; i++) {
+        vector_append(msg->tag_data_vec[tag], &data[i]);
+    }
 }

@@ -3,6 +3,12 @@
 
 #include <stddef.h>
 
+typedef struct {
+    unsigned int base_size;
+    void *arr;
+    size_t size;
+    size_t cap;
+} vector_t;
 typedef void* vector;
 
 vector vector_new(unsigned int base_size, size_t initial_cap);
