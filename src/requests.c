@@ -70,9 +70,9 @@ void requests_append_time(message_t *msg, time_t *t) {
     time_arr[6] = *t >> 16;
     time_arr[7] = *t >> 8;
     time_arr[8] = *t;
-    time_arr[9] = 0>> 24; // bytes 9-12: nanoseconds
-    time_arr[10] = 0>> 16;
-    time_arr[11] = 0>> 8;
+    time_arr[9] = 0 >> 24; // bytes 9-12: nanoseconds
+    time_arr[10] = 0 >> 16;
+    time_arr[11] = 0 >> 8;
     time_arr[12] = 0;
     time_arr[13] = 0; // bytes 13-14: zone offset in minutes
     time_arr[14] = 0;
